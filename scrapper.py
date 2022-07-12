@@ -20,7 +20,7 @@ wait = WebDriverWait(browser, delay)
 #Trying to open team match page
 try:
     continue_link = browser.find_element(By.PARTIAL_LINK_TEXT,team).click()
-    #Hardcoding XPATH of first inning score (Valid If first Innings is going on)
+    #Hardcoding XPATH of first inning scores
     inningsScore = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/h2")))
     status = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[1]/div[1]/div[1]/div[2]")))
     batsmanOneName = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/a")))
