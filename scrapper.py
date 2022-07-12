@@ -21,7 +21,7 @@ wait = WebDriverWait(browser, delay)
 try:
     continue_link = browser.find_element(By.PARTIAL_LINK_TEXT,team).click()
     #Hardcoding XPATH of first inning score (Valid If first Innings is going on)
-    firstInningsScore = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/h2")))
+    inningsScore = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/h2")))
     status = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[1]/div[1]/div[1]/div[2]")))
     batsmanOneName = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/a")))
     batsmanOneRuns = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[1]/div[2]/div[1]/div[2]/div[2]")))
@@ -31,16 +31,9 @@ try:
     batsmanTwoBalls = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[1]/div[2]/div[1]/div[3]/div[3]")))
     bowlerName =  WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/a")))
     bowlerOvers = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]")))
+    bowlerRuns = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[1]/div[2]/div[2]/div[2]/div[4]")))
     bowlerWickets = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[1]/div[2]/div[2]/div[2]/div[5]")))
-    #If First Inning element text is empty, that means second innings is going on and we need to hardcode the different positions
-    if firstInningsScore.text=="":
-        firstInningsScore= WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[2]/div[1]/div[1]/h2[1]")))
-        secondInningsScore = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div/div[2]/div[4]/div[3]/div[2]/div[2]/div[1]/div[1]/h2[2]")))
-        status = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.XPATH,"//html/body/div/div[2]/div[4]/div[3]/div[2]/div[2]/div[2]")))
-        print(firstInningsScore.text+ "\n" + secondInningsScore.text + "\n" + status.text)
-    else: 
-        message = firstInningsScore.text+ "\n" + status.text + "\nBatting:\n" + batsmanOneName.text + "* " + batsmanOneRuns.text + " (" + batsmanOneBalls.text + ")\n" + batsmanTwoName.text + " " + batsmanTwoRuns.text + " (" + batsmanTwoBalls.text + ")\nBowling:\n" + bowlerName.text + " O: " + bowlerOvers.text + " W: " + bowlerWickets.text
-    #Team name is not found on page. It is likely it is not playing a match at the moment.
+    message = inningsScore.text+ "\n" + status.text + "\nBatting:\n" + batsmanOneName.text + "* " + batsmanOneRuns.text + " (" + batsmanOneBalls.text + ")\n" + batsmanTwoName.text + " " + batsmanTwoRuns.text + " (" + batsmanTwoBalls.text + ")\nBowling:\n" + bowlerName.text + " O: " + bowlerOvers.text +" R:" + bowlerRuns.text + " W: " + bowlerWickets.text
 except:
     message = team + " is not playing a match right now."
 #Closing the Browser
